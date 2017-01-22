@@ -14,7 +14,7 @@ Square::Square(){
 
 void Square::init(){
     
-    myImage.loadImage("test.jpg");
+    myImage.loadImage("test.png");
     
     mesh.addVertex(ofVec3f(100,100,0));
     mesh.addVertex(ofVec3f(100,200,0));
@@ -48,7 +48,7 @@ void Square::init(){
     mesh.addIndex(1);
     mesh.addIndex(2);
     mesh.addIndex(4);
-
+ 
 
 }
 
@@ -56,7 +56,7 @@ void Square::draw(){
     ofPushMatrix();
     ofTranslate(300, 300,100);
     ofSetColor( 255, 255, 255 );
-    myImage.bind();
+    myImage.getTextureReference().bind();
     mesh.draw();
     myImage.unbind();
     ofPushMatrix();
