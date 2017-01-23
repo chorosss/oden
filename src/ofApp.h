@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "MySphere.h"
 #include "Square.h"
 
@@ -21,13 +22,16 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     ofBoxPrimitive box; // 立方体プリミティブ
+    float boxSize;
     ofSpherePrimitive sphere; // 球プリミティブ
     ofMesh mesh;
     ofEasyCam cam;
     ofLight light;
     
     ofImage myImage;
-    
+    ofSoundPlayer mySound; //ofSoundクラスをインスタンス化
+    ofSoundPlayer mySound_2; //ofSoundクラスをインスタンス化
+
     int w,h;
     
     float angle;
@@ -36,4 +40,11 @@ class ofApp : public ofBaseApp{
     
     vector <MySphere> MySpheres;
     Square mySquare;
+    
+    // GUIのパラメーター
+    ofxPanel gui;
+    ofxFloatSlider distance;
+    ofxFloatSlider volume;
+    ofxColorSlider color;
+    ofxVec2Slider position;
 };

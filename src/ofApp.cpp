@@ -6,8 +6,6 @@ void ofApp::setup(){
     angle = 0;
     camDistance = 1200.0f;
     
-    ofEnableDepthTest();
-    
     ofBackground(0, 180, 0);
     ofEnableDepthTest();
     ofEnableSmoothing();
@@ -38,11 +36,38 @@ void ofApp::setup(){
     }
     
     myImage.loadImage("test.jpg");
-}
+    mySound.loadSound("test3.mp3"); //サウンドファイルの読込み
+    mySound.setLoop(true); //ループ再生をONに
+    mySound.play(); //サウンド再生開始
+    mySound.setMultiPlay(true);
+    mySound_2.loadSound("test2.mp3"); //サウンドファイルの読込み
+    mySound_2.play(); //サウンド再生開始
+    mySound_2.setMultiPlay(true);
+
+    
+    // colorの初期値、最小値、最大値を設定
+    ofColor initColor = ofColor(0, 127, 255, 255);
+    ofColor minColor = ofColor(0,0,0,0);
+    ofColor maxColor = ofColor(255,255,255,255);
+    
+    // positionの初期値、最小値、最大値を設定
+    ofVec2f initPos = ofVec2f(ofGetWidth()/2, ofGetHeight()/2);
+    ofVec2f minPos = ofVec2f(0, 0);
+    ofVec2f maxPos = ofVec2f(ofGetWidth(), ofGetHeight());
+    
+    // GUIを設定
+    gui.setup();
+    gui.add(distance.setup("distance", 1200, 0, 3800));
+    gui.add(volume.setup("volume", 0, 0, 1));
+ }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     mySquare.init();
+    
+    mySound.setVolume(volume); //サウンド再生開始
+    float * val = ofSoundGetSpectrum(1); //再生中のサウンドの音量を取得
+    boxSize = val[0] * 10000.0; //円の半径に適用
     
     
     for(int i = 0; i < MySpheres.size();i++){
@@ -67,6 +92,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    glEnable(GL_DEPTH_TEST);
     cam.begin();
     ofSetColor(255);
     
@@ -75,7 +101,7 @@ void ofApp::draw(){
     ofVec3f camPos = MySpheres.back().getPos();
     
     cam.setTarget(mySquare.getPos());
-    cam.setDistance(1200);
+    cam.setDistance(distance);
     
     //cam.setTarget(camPos);
     //cam.setDistance(camDistance);
@@ -90,13 +116,11 @@ void ofApp::draw(){
 
     
     
-    box.set(200);
+    box.set(boxSize);
     box.setPosition(-150, 0, 0);
     box.rotate(sin(angle),10,10,10);
     ofSetColor(0, 0, 0);
-    myImage.getTextureReference().bind();
     box.draw();
-    myImage.unbind();
     ofSetColor(255, 255, 255);
     ofSetLineWidth(1);
     box.drawWireframe();
@@ -109,6 +133,9 @@ void ofApp::draw(){
     ofLine(150, 0, 0, 15000, 0, 0);
     cam.end();
 
+    // GUIを表示
+    glDisable(GL_DEPTH_TEST);
+    gui.draw();
     
     
 }
