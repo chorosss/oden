@@ -6,28 +6,47 @@
 //
 //
 
-#ifndef _MY_SPHERE/* ユニークな名前 */ //インクルードガード
-#define _MY_SPHERE/* ユニークな名前 */
+#ifndef _MY_SPHERE
+#define _MY_SPHERE
 
-#include "ofMain.h" //ofMain.hをインクルード
-class MySphere{ //クラスの開始
+#include "ofMain.h"
+class MySphere{
     
 public:
-    //公開のプロパティ、メソッドを宣言する
+    
     MySphere();
+    void init();
     void update();
-    void draw();
+    void draw(float volumeSize);
     
     void setPos(ofPoint pos);
+    void setMusic(int music);
+    void show();
+    
     ofPoint getPos();
     
+    
+    
 private:
-    //非公開のプロパティ、メソッドを宣言する
-    ofSpherePrimitive sphere; // 球プリミティブ
+    
+    ofSpherePrimitive sphere; 
     float radius;
     float counter;
+    float volumeSize;
+    int playCounter;
     ofPoint pos;
+    int music;
     
-}; //セミコロンを忘れずに!!
+    ofSoundPlayer mySound;
+    
+    int startTime = 0;
+    int s = ofGetSeconds();
+    
+    bool once;
+    
+    int frameRate;
+    int frameNum;
 
-#endif //インクルードガードの終了
+};
+
+#endif

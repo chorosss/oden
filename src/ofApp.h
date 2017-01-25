@@ -47,4 +47,5 @@ class ofApp : public ofBaseApp{
     ofxFloatSlider volume;
     ofxColorSlider color;
     ofxVec2Slider position;
+    ofxFloatSlider frameRate;
 };
