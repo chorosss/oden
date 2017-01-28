@@ -35,6 +35,7 @@ private:
     float volumeSize;
     int playCounter;
     ofPoint pos;
+    ofImage myImage;
     int music;
     
     ofSoundPlayer mySound;

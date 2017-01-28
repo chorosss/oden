@@ -17,6 +17,12 @@ MySphere::MySphere(){
 }
 
 void MySphere::init(){
+    myImage.loadImage("texture01.jpg");
+    
+    sphere.mapTexCoords(0, 0, 270, 180);
+    
+
+    
     if(music==1){
         mySound.loadSound("music/01.mp3");
     }else if(music ==2){
@@ -36,6 +42,7 @@ void MySphere::init(){
 
 void MySphere::update(){
     
+    sphere.mapTexCoords(0, 0, 200+ 100* sin(counter), 130 + 100* sin(counter));
     
     frameNum ++;
     
@@ -61,9 +68,11 @@ void MySphere::draw(float _volumeSize){
         ofSetColor(255,255,255);
         sphere.set(100 + 30 * sin(counter)+ volumeSize,int(ABS(sin(counter))*10 + 2));
         sphere.setPosition(pos.x, pos.y, pos.z);
+        myImage.getTextureReference().bind();
         sphere.draw();
-        ofSetColor(255, 0, 0);
-        sphere.drawWireframe();
+        myImage.getTextureReference().unbind();
+//        ofSetColor(255, 0, 0);
+//        sphere.drawWireframe();
 
 }
 
