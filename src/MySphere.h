@@ -10,6 +10,8 @@
 #define _MY_SPHERE
 
 #include "ofMain.h"
+#include "Object.h"
+
 class MySphere{
     
 public:

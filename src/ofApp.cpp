@@ -20,13 +20,23 @@ void ofApp::setup(){
         ofSetFrameRate(60); // if vertical sync is off, we can go a bit fast... this caps the framerate at 60fps.
     
     Square mySquare;
+    
+    current = ofPoint(250,0,0);
+
+    
+    //cylinder
+    Cylinder c;
+    c.setMusic(int (ofRandom(1,3)));
+    c.setPos(ofPoint(250,0,0));
+    c.init();
+    Cylinders.push_back(c);
+    
+    //sphere
     MySphere s;
-    s.setMusic(int(ofRandom(1, 6)));
+    s.setMusic(int(ofRandom(4, 6)));
     s.setPos(ofPoint(150,0,0));
     s.init();
     MySpheres.push_back(s);
-    
-
     
     // メッシュの幅と高さ
     w = 200;
@@ -38,16 +48,6 @@ void ofApp::setup(){
             mesh.addColor(ofFloatColor(0, 0, 1.0));
         }
     }
-    
-//    myImage.loadImage("test.jpg");
-//    mySound.loadSound("music/01.mp3"); //サウンドファイルの読込み
-//    mySound.setLoop(true); //ループ再生をONに
-//    mySound.play(); //サウンド再生開始
-//    mySound.setMultiPlay(true);
-//    mySound_2.loadSound("test2.mp3"); //サウンドファイルの読込み
-//    mySound_2.play(); //サウンド再生開始
-//    mySound_2.setMultiPlay(true);
-
     
     // colorの初期値、最小値、最大値を設定
     ofColor initColor = ofColor(0, 127, 255, 255);
@@ -77,8 +77,11 @@ void ofApp::update(){
     for(int i = 0; i < MySpheres.size();i++){
         MySpheres[i].update();
     }
+    for(int i = 0; i < Cylinders.size();i++){
+        Cylinders[i].update();
+    }
+    
     angle += 0.03f;
-    //camDistance += sin(angle)*10;
     
     // まず全ての頂点情報を削除
     mesh.clearVertices();
@@ -119,7 +122,7 @@ void ofApp::draw(){
 //    mesh.drawWireframe();
 
     
-    
+    //box
     box.set(100);
     box.setPosition(-150, 0, 0);
     box.rotate(sin(angle),10,10,10);
@@ -132,6 +135,13 @@ void ofApp::draw(){
     for(int i = 0; i < MySpheres.size();i++){
         MySpheres[i].draw(boxSize);
     }
+
+    for(int i = 0; i < Cylinders.size();i++){
+        Cylinders[i].draw();
+    }
+
+    
+    //bar
     ofSetColor(255, 255, 255);
     ofSetLineWidth(30);
     ofLine(150, 0, 0, 15000, 0, 0);
@@ -144,23 +154,38 @@ void ofApp::draw(){
     
 }
 
-//--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-   
-    
 
-    ofPoint prev = MySpheres.back().getPos();
-    MySphere s;
-    s.setMusic(int(ofRandom(1, 6)));
-    s.setPos(ofPoint(prev.x + 200,0,0));
-    s.init();
-    MySpheres.push_back(s);
+void ofApp::keyPressed  (int key){
+    //キー入力でモード切り替え
+    switch (key){
+        case 'a':
+        {
+            ofPoint prev = current;
+            MySphere s;
+            s.setMusic(int(ofRandom(1, 6)));
+            s.setPos(ofPoint(prev.x + 200,0,0));
+            s.init();
+            MySpheres.push_back(s);
+
+            break;
+        }
+            
+        case 's':
+        {
+            ofPoint prev = current;
+            Cylinder c;
+            c.setMusic(int(ofRandom(1, 3)));
+            c.setPos(ofPoint(prev.x + 200,0,0));
+            c.init();
+            Cylinders.push_back(c);
+            break;
+        }
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    
-}
+   }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y){

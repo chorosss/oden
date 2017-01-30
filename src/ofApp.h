@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "Object.h"
+#include "Cylinder.h"
 #include "MySphere.h"
 #include "Square.h"
 
@@ -31,6 +33,8 @@ class ofApp : public ofBaseApp{
     ofImage myImage;
     ofSoundPlayer mySound; //ofSoundクラスをインスタンス化
     ofSoundPlayer mySound_2; //ofSoundクラスをインスタンス化
+    
+    ofPoint current;
 
     int w,h;
     
@@ -39,6 +43,7 @@ class ofApp : public ofBaseApp{
     float camDistance;
     
     vector <MySphere> MySpheres;
+    vector <Cylinder> Cylinders;
     Square mySquare;
     
     // GUIのパラメーター

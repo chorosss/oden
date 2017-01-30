@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		C23A69011E3E4AF10086F882 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C23A68FF1E3E4AF10086F882 /* Object.cpp */; };
+		C27DC8B71E3E514900D1A1D8 /* Cylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27DC8B51E3E514900D1A1D8 /* Cylinder.cpp */; };
 		C28E92D61E2FD7D700AA5728 /* ofApp.h in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */; };
 		C28E92DA1E2FDC5200AA5728 /* MySphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C28E92D81E2FDC5200AA5728 /* MySphere.cpp */; };
 		C28E92DD1E3257BD00AA5728 /* Square.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C28E92DB1E3257BD00AA5728 /* Square.cpp */; };
@@ -71,6 +73,10 @@
 
 /* Begin PBXFileReference section */
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		C23A68FF1E3E4AF10086F882 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
+		C23A69001E3E4AF10086F882 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
+		C27DC8B51E3E514900D1A1D8 /* Cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cylinder.cpp; sourceTree = "<group>"; };
+		C27DC8B61E3E514900D1A1D8 /* Cylinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cylinder.h; sourceTree = "<group>"; };
 		C28E92D81E2FDC5200AA5728 /* MySphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MySphere.cpp; sourceTree = "<group>"; };
 		C28E92D91E2FDC5200AA5728 /* MySphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySphere.h; sourceTree = "<group>"; };
 		C28E92DB1E3257BD00AA5728 /* Square.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Square.cpp; sourceTree = "<group>"; };
@@ -247,12 +253,16 @@
 			isa = PBXGroup;
 			children = (
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
-				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				C28E92D81E2FDC5200AA5728 /* MySphere.cpp */,
+				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
+				C23A69001E3E4AF10086F882 /* Object.h */,
+				C23A68FF1E3E4AF10086F882 /* Object.cpp */,
 				C28E92D91E2FDC5200AA5728 /* MySphere.h */,
-				C28E92DB1E3257BD00AA5728 /* Square.cpp */,
+				C28E92D81E2FDC5200AA5728 /* MySphere.cpp */,
+				C27DC8B61E3E514900D1A1D8 /* Cylinder.h */,
+				C27DC8B51E3E514900D1A1D8 /* Cylinder.cpp */,
 				C28E92DC1E3257BD00AA5728 /* Square.h */,
+				C28E92DB1E3257BD00AA5728 /* Square.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -356,8 +366,10 @@
 			files = (
 				C2AE88111E365F3300619B63 /* ofxLabel.cpp in Sources */,
 				C28E92DD1E3257BD00AA5728 /* Square.cpp in Sources */,
+				C27DC8B71E3E514900D1A1D8 /* Cylinder.cpp in Sources */,
 				C28E92D61E2FD7D700AA5728 /* ofApp.h in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				C23A69011E3E4AF10086F882 /* Object.cpp in Sources */,
 				C2AE88141E365F3300619B63 /* ofxSliderGroup.cpp in Sources */,
 				C28E92DA1E2FDC5200AA5728 /* MySphere.cpp in Sources */,
 				C2AE880F1E365F3300619B63 /* ofxButton.cpp in Sources */,
