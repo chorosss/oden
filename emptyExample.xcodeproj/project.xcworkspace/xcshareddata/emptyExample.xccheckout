@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>36DF4DD3-ABED-49EB-830E-C10ED5399B5E</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>emptyExample</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>5C9C21C9B2E1D080A61F82141C8881B31BCE86E9</key>
 		<string>https://github.com/chorosss/oden.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>emptyExample.xcodeproj/project.xcworkspace</string>
+	<string>emptyExample.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>5C9C21C9B2E1D080A61F82141C8881B31BCE86E9</key>

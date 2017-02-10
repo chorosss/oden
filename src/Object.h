@@ -11,32 +11,20 @@
 
 #include <stdio.h>
 #include "ofMain.h"
-#include "Object.h"
 
 class Object{
 public:
     Object();
-    void init();
-    void update();
-    void draw(float volumeSize);
-    
+    void init(float _x,float _y);
+    void draw();
     void setPos(ofPoint pos);
     ofPoint getPos();
-    
-    void setMusic(int music);
-    void show();
-    
-    
-    
+    int testFunction();
+    float x,y;
+
 private:
-    
     ofPoint pos;
-    
-    float volumeSize;
-    
-    bool once;
-    int startTime = 0;
-    float counter;
-    int frameNum;
+    ofMesh mesh;
+    ofImage myImage;
 };
 #endif /* defined(__emptyExample__Object__) */

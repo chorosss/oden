@@ -6,6 +6,8 @@
 #include "Cylinder.h"
 #include "MySphere.h"
 #include "Square.h"
+#include "ColorObject.h"
+
 
 class ofApp : public ofBaseApp{
 	public:
@@ -45,6 +47,8 @@ class ofApp : public ofBaseApp{
     vector <MySphere> MySpheres;
     vector <Cylinder> Cylinders;
     Square mySquare;
+    Object myObject;
+    ColorObject c1;
     
     // GUIのパラメーター
     ofxPanel gui;

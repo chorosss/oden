@@ -19,7 +19,11 @@ void ofApp::setup(){
     light.setSpecularColor(ofFloatColor(0,0,0));
         ofSetFrameRate(60); // if vertical sync is off, we can go a bit fast... this caps the framerate at 60fps.
     
-    Square mySquare;
+    //mySquare.init();
+    myObject.init(120,-120);
+    c1.init(120,120);
+    int test= c1.Object::testFunction();
+    std::cout << "value: " << test << endl;
     
     current = ofPoint(250,0,0);
 
@@ -67,7 +71,6 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    mySquare.init();
     
     mySound.setVolume(volume); //サウンド再生開始
     float * val = ofSoundGetSpectrum(1); //再生中のサウンドの音量を取得
@@ -82,19 +85,19 @@ void ofApp::update(){
     }
     
     angle += 0.03f;
-    
-    // まず全ての頂点情報を削除
-    mesh.clearVertices();
-    
-    // 全ての頂点の位置を更新して頂点情報として追加
-    for (int i = 0; i < w; i+=10) {
-        for (int j = 0; j < h; j+=10) {
-            float x = sin(i * 0.1 + ofGetElapsedTimef())*10.0;
-            float y = sin(j*0.15 + ofGetElapsedTimef()) * 10.0;
-            float z = x + y;
-            mesh.addVertex(ofVec3f(i - w/2, j - h/2, z));
-        }
-    }
+//    
+//    // まず全ての頂点情報を削除
+//    mesh.clearVertices();
+//    
+//    // 全ての頂点の位置を更新して頂点情報として追加
+//    for (int i = 0; i < w; i+=10) {
+//        for (int j = 0; j < h; j+=10) {
+//            float x = sin(i * 0.1 + ofGetElapsedTimef())*10.0;
+//            float y = sin(j*0.15 + ofGetElapsedTimef()) * 10.0;
+//            float z = x + y;
+//            mesh.addVertex(ofVec3f(i - w/2, j - h/2, z));
+//        }
+//    }
 }
 
 //--------------------------------------------------------------
@@ -103,7 +106,9 @@ void ofApp::draw(){
     cam.begin();
     ofSetColor(255);
     
-    mySquare.draw();
+    //mySquare.draw();
+    myObject.draw();
+    c1.draw();
     
     ofVec3f camPos = current;
     
