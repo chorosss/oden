@@ -105,14 +105,12 @@ void ofApp::draw(){
     
     mySquare.draw();
     
-    ofVec3f camPos = MySpheres.back().getPos();
+    ofVec3f camPos = current;
     
-    cam.setTarget(mySquare.getPos());
+    cam.setTarget(camPos);
     cam.setDistance(distance);
     
-    //cam.setTarget(camPos);
-    //cam.setDistance(camDistance);
-    //cam.setPosition(camPos.x + 1000+ABS(sin(angle))*100 ,camPos.y +1000 ,camPos.z + 1000+ABS(sin(angle))*100);
+  
     
     // 頂点の位置をドットで表示
 //    glPointSize(12.0);
@@ -161,23 +159,30 @@ void ofApp::keyPressed  (int key){
         case 'a':
         {
             ofPoint prev = current;
+            ofPoint next = ofPoint(prev.x + 200,0,0);
+            
             MySphere s;
             s.setMusic(int(ofRandom(1, 6)));
-            s.setPos(ofPoint(prev.x + 200,0,0));
+            s.setPos(next);
             s.init();
             MySpheres.push_back(s);
-
+            
+            current = next;
             break;
         }
             
         case 's':
         {
             ofPoint prev = current;
+            ofPoint next = ofPoint(prev.x + 200,0,0);
+            
             Cylinder c;
             c.setMusic(int(ofRandom(1, 3)));
-            c.setPos(ofPoint(prev.x + 200,0,0));
+            c.setPos(next);
             c.init();
             Cylinders.push_back(c);
+            
+            current = next;
             break;
         }
     }
