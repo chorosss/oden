@@ -46,9 +46,9 @@ class ofApp : public ofBaseApp{
     
     vector <MySphere> MySpheres;
     vector <Cylinder> Cylinders;
+    vector <ColorObject> cones;
+    
     Square mySquare;
-    Object myObject;
-    ColorObject c1;
     
     // GUIのパラメーター
     ofxPanel gui;

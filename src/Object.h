@@ -16,15 +16,29 @@ class Object{
 public:
     Object();
     void init(float _x,float _y,string _imageurl);
+    void update();
     void draw();
+    void setMusic(int music);
     void setPos(ofPoint pos);
+    void show();
     ofPoint getPos();
     int testFunction();
     float x,y;
+    ofSoundPlayer mySound;
+    int music;
+    
+    bool once;
+    
+    float counter;
+    
+    int frameRate;
+    int frameNum;
 
 private:
     ofPoint pos;
     ofMesh mesh;
     ofImage myImage;
+ 
+
 };
 #endif /* defined(__emptyExample__Object__) */

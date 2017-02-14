@@ -15,12 +15,15 @@
 class ColorObject:public Object{
     
 public:
-    void init(float _x,float _y);
+    void init(float _x,float _y,float _z);
     void draw();
     void setPos(ofPoint pos);
     ofPoint getPos();
     
 private:
+    
+    ofBoxPrimitive box; // 立方体プリミティブ
+    ofConePrimitive cone;//cone
     ofPoint pos;
     ofMesh mesh;
     ofImage myImage;

@@ -20,10 +20,7 @@ void ofApp::setup(){
         ofSetFrameRate(60); // if vertical sync is off, we can go a bit fast... this caps the framerate at 60fps.
     
     //mySquare.init();
-    myObject.init(120,-120,"texture01.jpg");
-    c1.init(120,120);
-    int test= c1.Object::testFunction();
-    std::cout << "value: " << test << endl;
+//    std::cout << "value: " << test << endl;
     
     current = ofPoint(250,0,0);
 
@@ -41,6 +38,11 @@ void ofApp::setup(){
     s.setPos(ofPoint(150,0,0));
     s.init();
     MySpheres.push_back(s);
+    
+    //box
+    box.set(100);
+    box.setPosition(-150, 0, 0);
+
     
     // メッシュの幅と高さ
     w = 200;
@@ -98,6 +100,7 @@ void ofApp::update(){
 //            mesh.addVertex(ofVec3f(i - w/2, j - h/2, z));
 //        }
 //    }
+
 }
 
 //--------------------------------------------------------------
@@ -106,9 +109,6 @@ void ofApp::draw(){
     cam.begin();
     ofSetColor(255);
     
-    //mySquare.draw();
-    myObject.draw();
-    c1.draw();
     
     ofVec3f camPos = current;
     
@@ -126,8 +126,6 @@ void ofApp::draw(){
 
     
     //box
-    box.set(100);
-    box.setPosition(-150, 0, 0);
     box.rotate(sin(angle),10,10,10);
     ofSetColor(0, 0, 0);
     box.draw();
@@ -142,6 +140,11 @@ void ofApp::draw(){
     for(int i = 0; i < Cylinders.size();i++){
         Cylinders[i].draw();
     }
+    
+    for(int i = 0; i < cones.size();i++){
+        cones[i].draw();
+    }
+
 
     
     //bar
@@ -190,6 +193,21 @@ void ofApp::keyPressed  (int key){
             current = next;
             break;
         }
+        case 'd':
+        {
+            ofPoint prev = current;
+            ofPoint next = ofPoint(prev.x + 200,0,0);
+            
+            ColorObject cone;
+            cone.Object::setMusic(int(ofRandom(1, 3)));
+            cone.Object::setPos(next);
+            cone.init(next.x,next.y,next.z);
+            cones.push_back(cone);
+            
+            current = next;
+            break;
+        }
+
     }
 }
 
