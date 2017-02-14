@@ -12,11 +12,11 @@ Object::Object(){
     pos = ofPoint(100,0,0);
   }
 
-void Object::init(float _x,float _y){
+void Object::init(float _x,float _y,string _imageUrl){
     
     x = _x;
     y = _y;
-    myImage.loadImage("texture01.jpg");
+    myImage.loadImage(_imageUrl);
     
     mesh.addVertex(ofVec3f(100,100,0));
     mesh.addVertex(ofVec3f(100,200,0));
@@ -51,6 +51,7 @@ void Object::init(float _x,float _y){
     mesh.addIndex(2);
     mesh.addIndex(4);
 }
+
 void Object::draw(){
     ofPushMatrix();
     ofTranslate(x,y,100);

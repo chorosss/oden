@@ -9,9 +9,11 @@
 #include "ColorObject.h"
 
 
-void ColorObject::init(float _x,float _y){    
-    Object::init(_x,_y);
+void ColorObject::init(float _x,float _y){
+
+    Object::init(_x,_y,"texture03.jpg");
     }
+
 void ColorObject::draw(){
     Object::draw();
 }

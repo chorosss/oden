@@ -20,7 +20,7 @@ void ofApp::setup(){
         ofSetFrameRate(60); // if vertical sync is off, we can go a bit fast... this caps the framerate at 60fps.
     
     //mySquare.init();
-    myObject.init(120,-120);
+    myObject.init(120,-120,"texture01.jpg");
     c1.init(120,120);
     int test= c1.Object::testFunction();
     std::cout << "value: " << test << endl;

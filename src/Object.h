@@ -15,7 +15,7 @@
 class Object{
 public:
     Object();
-    void init(float _x,float _y);
+    void init(float _x,float _y,string _imageurl);
     void draw();
     void setPos(ofPoint pos);
     ofPoint getPos();
