@@ -34,9 +34,7 @@ void ofApp::setup(){
     
     //sphere
     MySphere s;
-    s.setMusic(int(ofRandom(4, 6)));
-    s.setPos(ofPoint(150,0,0));
-    s.init();
+    s.init(ofPoint(150,0,0));
     MySpheres.push_back(s);
     
     //box
@@ -138,7 +136,7 @@ void ofApp::draw(){
     }
 
     for(int i = 0; i < Cylinders.size();i++){
-        Cylinders[i].draw();
+        Cylinders[i].draw(boxSize);
     }
     
     for(int i = 0; i < cones.size();i++){
@@ -170,9 +168,7 @@ void ofApp::keyPressed  (int key){
             ofPoint next = ofPoint(prev.x + 200,0,0);
             
             MySphere s;
-            s.setMusic(int(ofRandom(1, 6)));
-            s.setPos(next);
-            s.init();
+            s.init(next);
             MySpheres.push_back(s);
             
             current = next;
@@ -198,7 +194,7 @@ void ofApp::keyPressed  (int key){
             ofPoint prev = current;
             ofPoint next = ofPoint(prev.x + 200,0,0);
             
-            ColorObject cone;
+            Cone cone;
             cone.Object::setMusic(int(ofRandom(1, 3)));
             cone.Object::setPos(next);
             cone.init(next.x,next.y,next.z);

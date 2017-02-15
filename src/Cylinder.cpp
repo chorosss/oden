@@ -47,7 +47,7 @@ void Cylinder::update(){
     frameNum ++;
     
     if(frameNum==300){
-        mySound.play();
+        //mySound.play();
         frameNum=0;
     }
     
@@ -56,9 +56,9 @@ void Cylinder::update(){
     
 }
 
-void Cylinder::draw(){
+void Cylinder::draw(float _volumeSize){
     
-    //volumeSize = _volumeSize;
+    volumeSize = _volumeSize;
     
     if(once){
         show();

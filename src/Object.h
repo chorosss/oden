@@ -15,22 +15,25 @@
 class Object{
 public:
     Object();
-    void init(float _x,float _y,string _imageurl);
+    void init();
     void update();
     void draw();
+    void show();
+    
+    //setter
     void setMusic(int music);
     void setPos(ofPoint pos);
-    void show();
+    
+    //getter
     ofPoint getPos();
-    int testFunction();
-    float x,y;
+    float getCounter();
+    
     ofSoundPlayer mySound;
+    
+    float x,y;
     int music;
-    
     bool once;
-    
     float counter;
-    
     int frameRate;
     int frameNum;
 

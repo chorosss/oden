@@ -18,7 +18,7 @@ public:
     Cylinder();
     void init();
     void update();
-    void draw();
+    void draw(float _volumeSize);
     
     void setPos(ofPoint pos);
     void setMusic(int music);

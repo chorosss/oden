@@ -12,12 +12,12 @@
 #include "ofMain.h"
 #include "Object.h"
 
-class MySphere{
+class MySphere:public Object{
     
 public:
     
     MySphere();
-    void init();
+    void init(ofPoint pos);
     void update();
     void draw(float volumeSize);
     
@@ -26,6 +26,7 @@ public:
     void show();
     
     ofPoint getPos();
+    bool once;
     
     
     
@@ -38,14 +39,12 @@ private:
     int playCounter;
     ofPoint pos;
     ofImage myImage;
+
     int music;
-    
-    ofSoundPlayer mySound;
     
     int startTime = 0;
     int s = ofGetSeconds();
     
-    bool once;
     
     int frameRate;
     int frameNum;

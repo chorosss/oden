@@ -6,21 +6,19 @@
 //
 //
 #include "ofMain.h"
-#include "ColorObject.h"
+#include "Cone.h"
 
 
-void ColorObject::init(float _x,float _y,float _z){
+void Cone::init(float _x,float _y,float _z){
     pos = ofPoint(_x,_y,_z);
-    Object::init(_x,_y,"texture03.jpg");
-    //box
+    Object::init();
     cone.set(100,100);
 
     }
 
-void ColorObject::draw(){
+void Cone::draw(){
     
     Object::draw();
-    //box
     ofSetColor(0, 0, 0);
     cone.setPosition(pos);
     cone.draw();

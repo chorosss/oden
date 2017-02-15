@@ -6,7 +6,7 @@
 #include "Cylinder.h"
 #include "MySphere.h"
 #include "Square.h"
-#include "ColorObject.h"
+#include "Cone.h"
 
 
 class ofApp : public ofBaseApp{
@@ -46,7 +46,7 @@ class ofApp : public ofBaseApp{
     
     vector <MySphere> MySpheres;
     vector <Cylinder> Cylinders;
-    vector <ColorObject> cones;
+    vector <Cone> cones;
     
     Square mySquare;
     

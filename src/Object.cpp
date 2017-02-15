@@ -13,12 +13,12 @@ Object::Object(){
 
   }
 
-void Object::init(float _x,float _y,string _imageUrl){
-    
-    x = _x;
-    y = _y;
-    myImage.loadImage(_imageUrl);
+void Object::init(){
+
     once = true;
+    frameNum=0;
+    counter = 0;
+    mySound.setLoop(false); //ループ再生をONに
 //    
 //    mesh.addVertex(ofVec3f(100,100,0));
 //    mesh.addVertex(ofVec3f(100,200,0));
@@ -56,6 +56,8 @@ void Object::init(float _x,float _y,string _imageUrl){
 void Object::update(){
         
     frameNum ++;
+    
+    std::cout << frameNum << endl;
     
     if(frameNum==300){
         mySound.play();
@@ -98,8 +100,8 @@ ofPoint Object::getPos(){
     return pos;
 }
 
-int Object::testFunction(){
-    return 1;
+float Object::getCounter(){
+    return counter;
 }
 
 void Object::setMusic(int _music){

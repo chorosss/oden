@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "Object.h"
-class ColorObject:public Object{
+class Cone:public Object{
     
 public:
     void init(float _x,float _y,float _z);
