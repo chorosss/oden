@@ -17,52 +17,19 @@ void ofApp::setup(){
     light.setAmbientColor(ofFloatColor(.7,1,1,0.0));
     light.setDiffuseColor(ofFloatColor(.2,0,0));
     light.setSpecularColor(ofFloatColor(0,0,0));
-        ofSetFrameRate(60); // if vertical sync is off, we can go a bit fast... this caps the framerate at 60fps.
-    
-    //mySquare.init();
+    ofSetFrameRate(60);
+
 //    std::cout << "value: " << test << endl;
     
     current = ofPoint(250,0,0);
 
+//    //sphere
+//    Sphere s;
+//    s.init(ofPoint(150,0,0));
+//    Spheres.push_back(s);
     
-    //cylinder
-    Cylinder c;
-    c.setMusic(int (ofRandom(1,3)));
-    c.setPos(ofPoint(250,0,0));
-    c.init();
-    Cylinders.push_back(c);
-    
-    //sphere
-    MySphere s;
-    s.init(ofPoint(150,0,0));
-    MySpheres.push_back(s);
-    
-    //box
-    box.set(100);
-    box.setPosition(-150, 0, 0);
+    Mysquare.init();
 
-    
-    // メッシュの幅と高さ
-    w = 200;
-    h = 200;
-    
-    // 頂点の色を初期化
-    for (int i = 0; i < w; i+=10) {
-        for (int j = 0; j < h; j+=10) {
-            mesh.addColor(ofFloatColor(0, 0, 1.0));
-        }
-    }
-    
-    // colorの初期値、最小値、最大値を設定
-    ofColor initColor = ofColor(0, 127, 255, 255);
-    ofColor minColor = ofColor(0,0,0,0);
-    ofColor maxColor = ofColor(255,255,255,255);
-    
-    // positionの初期値、最小値、最大値を設定
-    ofVec2f initPos = ofVec2f(ofGetWidth()/2, ofGetHeight()/2);
-    ofVec2f minPos = ofVec2f(0, 0);
-    ofVec2f maxPos = ofVec2f(ofGetWidth(), ofGetHeight());
-    
     // GUIを設定
     gui.setup();
     gui.add(distance.setup("distance", 1200, 0, 3800));
@@ -77,27 +44,22 @@ void ofApp::update(){
     boxSize = val[0] * 1000.0; //円の半径に適用
     
     
-    for(int i = 0; i < MySpheres.size();i++){
-        MySpheres[i].update();
+    for(int i = 0; i < Spheres.size();i++){
+        Spheres[i].update();
     }
     for(int i = 0; i < Cylinders.size();i++){
         Cylinders[i].update();
     }
-    
-    angle += 0.03f;
-//    
-//    // まず全ての頂点情報を削除
-//    mesh.clearVertices();
-//    
-//    // 全ての頂点の位置を更新して頂点情報として追加
-//    for (int i = 0; i < w; i+=10) {
-//        for (int j = 0; j < h; j+=10) {
-//            float x = sin(i * 0.1 + ofGetElapsedTimef())*10.0;
-//            float y = sin(j*0.15 + ofGetElapsedTimef()) * 10.0;
-//            float z = x + y;
-//            mesh.addVertex(ofVec3f(i - w/2, j - h/2, z));
-//        }
-//    }
+    for(int i = 0; i < Cones.size();i++){
+        Cones[i].update();
+    }
+    for(int i = 0; i < Boxes.size();i++){
+        Boxes[i].update();
+    }
+    for(int i = 0; i < Plates.size();i++){
+        Plates[i].update();
+    }
+
 
 }
 
@@ -107,44 +69,32 @@ void ofApp::draw(){
     cam.begin();
     ofSetColor(255);
     
-    
     ofVec3f camPos = current;
     
     cam.setTarget(camPos);
     cam.setDistance(distance);
     
-  
+    Mysquare.draw();
     
-    // 頂点の位置をドットで表示
-//    glPointSize(12.0);
-//    glEnable(GL_POINT_SMOOTH);
-//    mesh.addColor(ofFloatColor(0, 0, 0));
-//    mesh.drawVertices();
-//    mesh.drawWireframe();
-
-    
-    //box
-    box.rotate(sin(angle),10,10,10);
-    ofSetColor(0, 0, 0);
-    box.draw();
-    ofSetColor(255, 255, 255);
-    ofSetLineWidth(1);
-    box.drawWireframe();
-    
-    for(int i = 0; i < MySpheres.size();i++){
-        MySpheres[i].draw(boxSize);
+    for(int i = 0; i < Spheres.size();i++){
+        Spheres[i].draw(boxSize);
     }
 
     for(int i = 0; i < Cylinders.size();i++){
         Cylinders[i].draw(boxSize);
     }
     
-    for(int i = 0; i < cones.size();i++){
-        cones[i].draw();
+    for(int i = 0; i < Cones.size();i++){
+        Cones[i].draw();
+    }
+    for(int i = 0; i < Boxes.size();i++){
+        Boxes[i].draw();
+    }
+    for(int i = 0; i < Plates.size();i++){
+        Plates[i].draw();
     }
 
 
-    
     //bar
     ofSetColor(255, 255, 255);
     ofSetLineWidth(30);
@@ -167,9 +117,9 @@ void ofApp::keyPressed  (int key){
             ofPoint prev = current;
             ofPoint next = ofPoint(prev.x + 200,0,0);
             
-            MySphere s;
+            Sphere s;
             s.init(next);
-            MySpheres.push_back(s);
+            Spheres.push_back(s);
             
             current = next;
             break;
@@ -181,9 +131,7 @@ void ofApp::keyPressed  (int key){
             ofPoint next = ofPoint(prev.x + 200,0,0);
             
             Cylinder c;
-            c.setMusic(int(ofRandom(1, 3)));
-            c.setPos(next);
-            c.init();
+            c.init(next);
             Cylinders.push_back(c);
             
             current = next;
@@ -195,15 +143,39 @@ void ofApp::keyPressed  (int key){
             ofPoint next = ofPoint(prev.x + 200,0,0);
             
             Cone cone;
-            cone.Object::setMusic(int(ofRandom(1, 3)));
             cone.Object::setPos(next);
-            cone.init(next.x,next.y,next.z);
-            cones.push_back(cone);
+            cone.init(next);
+            Cones.push_back(cone);
             
             current = next;
             break;
         }
-
+        case 'f':
+        {
+            ofPoint prev = current;
+            ofPoint next = ofPoint(prev.x + 200,0,0);
+            
+            Box b;
+            b.Object::setPos(next);
+            b.init(next);
+            Boxes.push_back(b);
+            
+            current = next;
+            break;
+        }
+        case 'g':
+        {
+            ofPoint prev = current;
+            ofPoint next = ofPoint(prev.x + 200,0,0);
+            
+            Plate p;
+            p.Object::setPos(next);
+            p.init(next);
+            Plates.push_back(p);
+            
+            current = next;
+            break;
+        }
     }
 }
 

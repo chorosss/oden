@@ -18,6 +18,7 @@ void Object::init(){
     once = true;
     frameNum=0;
     counter = 0;
+    angle = 0;
     mySound.setLoop(false); //ループ再生をONに
 //    
 //    mesh.addVertex(ofVec3f(100,100,0));
@@ -57,15 +58,13 @@ void Object::update(){
         
     frameNum ++;
     
-    std::cout << frameNum << endl;
-    
     if(frameNum==300){
         mySound.play();
         frameNum=0;
     }
     
     counter += 0.03f;
-    
+    angle += 0.03f;
     
 }
 
@@ -73,7 +72,7 @@ void Object::update(){
 void Object::draw(){
     
     if(once){
-        std::cout << "value: "<< endl;
+        //std::cout << "value: "<< endl;
         show();
         once = false;
     }
@@ -104,6 +103,10 @@ float Object::getCounter(){
     return counter;
 }
 
+float Object::getAngle(){
+    return angle;
+}
+
 void Object::setMusic(int _music){
     music = _music;
     
@@ -125,5 +128,5 @@ void Object::setMusic(int _music){
 
 void Object::show(){
     mySound.play();
-    std::cout << "value: " << music << endl;
+    
 }

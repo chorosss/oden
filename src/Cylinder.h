@@ -13,10 +13,10 @@
 #include "ofMain.h"
 #include "Object.h"
 
-class Cylinder{
+class Cylinder:public Object{
 public:
     Cylinder();
-    void init();
+    void init(ofPoint pos);
     void update();
     void draw(float _volumeSize);
     

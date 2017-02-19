@@ -4,9 +4,11 @@
 #include "ofxGui.h"
 #include "Object.h"
 #include "Cylinder.h"
-#include "MySphere.h"
+#include "Sphere.h"
 #include "Square.h"
 #include "Cone.h"
+#include "Box.h"
+#include "Plate.h"
 
 
 class ofApp : public ofBaseApp{
@@ -25,32 +27,35 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    ofBoxPrimitive box; // 立方体プリミティブ
     float boxSize;
-    ofSpherePrimitive sphere; // 球プリミティブ
+    int w,h;
+    float angle;
+    float camDistance;
+    ofPoint current;
+    
+    //premitive
+    ofBoxPrimitive box;
+    ofSpherePrimitive sphere;
     ofMesh mesh;
     ofEasyCam cam;
     ofLight light;
     
+    
+    //sound
     ofImage myImage;
-    ofSoundPlayer mySound; //ofSoundクラスをインスタンス化
-    ofSoundPlayer mySound_2; //ofSoundクラスをインスタンス化
+    ofSoundPlayer mySound;
+    ofSoundPlayer mySound_2;
     
-    ofPoint current;
-
-    int w,h;
-    
-    float angle;
-    
-    float camDistance;
-    
-    vector <MySphere> MySpheres;
+ 
+    //object
+    vector <Sphere> Spheres;
     vector <Cylinder> Cylinders;
-    vector <Cone> cones;
+    vector <Cone> Cones;
+    vector <Box> Boxes;
+    vector <Plate> Plates;
+    Square Mysquare;
     
-    Square mySquare;
-    
-    // GUIのパラメーター
+    // GUI para
     ofxPanel gui;
     ofxFloatSlider distance;
     ofxFloatSlider volume;

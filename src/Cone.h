@@ -15,14 +15,19 @@
 class Cone:public Object{
     
 public:
-    void init(float _x,float _y,float _z);
+    Cone();
+    void init(ofPoint pos);
+    void update();
     void draw();
     void setPos(ofPoint pos);
     ofPoint getPos();
     
 private:
     
-    ofBoxPrimitive box; // 立方体プリミティブ
+    int startTime = 0;
+    int frameNum;
+    bool once;
+    
     ofConePrimitive cone;//cone
     ofPoint pos;
     ofMesh mesh;

@@ -8,13 +8,25 @@
 #include "ofMain.h"
 #include "Cone.h"
 
+Cone::Cone(){
+    counter = 0;
+    frameNum=0;
+    once = true;
+    
+}
 
-void Cone::init(float _x,float _y,float _z){
-    pos = ofPoint(_x,_y,_z);
+void Cone::init(ofPoint _pos){
+    pos = _pos;
     Object::init();
+    Object::setMusic(int(ofRandom(1, 3)));
     cone.set(100,100);
 
     }
+void Cone::update(){
+    
+    Object::update();
+    counter = Object::getCounter();    
+}
 
 void Cone::draw(){
     

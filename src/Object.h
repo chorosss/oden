@@ -27,6 +27,7 @@ public:
     //getter
     ofPoint getPos();
     float getCounter();
+    float getAngle();
     
     ofSoundPlayer mySound;
     
@@ -36,6 +37,8 @@ public:
     float counter;
     int frameRate;
     int frameNum;
+    
+    float angle;
 
 private:
     ofPoint pos;

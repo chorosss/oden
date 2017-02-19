@@ -9,10 +9,10 @@
 #include "Square.h"
 
 Square::Square(){
-    pos = ofPoint(150,0,0);
 }
 
 void Square::init(){
+    pos = ofPoint(-150,0,0);
     
     myImage.loadImage("texture05.jpg");
     
@@ -53,6 +53,7 @@ void Square::init(){
 }
 
 void Square::draw(){
+    //std::cout << "square draw "<< endl;
     ofPushMatrix();
     ofTranslate(300, 300,100);
     ofSetColor( 255, 255, 255 );
