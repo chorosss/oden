@@ -22,13 +22,16 @@ void ofApp::setup(){
 //    std::cout << "value: " << test << endl;
     
     current = ofPoint(250,0,0);
-
-//    //sphere
-//    Sphere s;
-//    s.init(ofPoint(150,0,0));
-//    Spheres.push_back(s);
     
     Mysquare.init();
+    
+    //3dmodel
+    squirrelModel.loadModel("squirrel/NewSquirrel.3ds", 20);
+    squirrelModel.setRotation(0, 90, 1, 0, 0);
+    squirrelModel.setRotation(1, 270, 0, 0, 1);
+    squirrelModel.setScale(0.9, 0.9, 0.9);
+    squirrelModel.setPosition(0, 0, 0);
+
 
     // GUIを設定
     gui.setup();
@@ -99,11 +102,20 @@ void ofApp::draw(){
     ofSetColor(255, 255, 255);
     ofSetLineWidth(30);
     ofLine(150, 0, 0, 15000, 0, 0);
+    
+    //3d model
+    ofSetColor(255, 255, 255, 255);
+    squirrelModel.setScale(0.9, 0.9, 0.9);
+    squirrelModel.draw();
+    
     cam.end();
 
     // GUIを表示
     glDisable(GL_DEPTH_TEST);
     gui.draw();
+    ofSetHexColor(0x000000);
+    ofDrawBitmapString("fps: "+ofToString(ofGetFrameRate(), 2), 10, 15);
+
     
     
 }

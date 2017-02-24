@@ -19,7 +19,7 @@ void Plate::init(ofPoint _pos){
     meshWidth =  100;
     meshHeight = 100;
     meshDepth = 150;
-    myImage.loadImage("texture05.jpg");
+    myImage.loadImage("texture01.jpg");
     
     mesh.addVertex(ofVec3f(-meshWidth,-meshHeight,0));
     mesh.addVertex(ofVec3f(-meshWidth,meshHeight,0));

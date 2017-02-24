@@ -14,7 +14,7 @@ Square::Square(){
 void Square::init(){
     pos = ofPoint(-150,0,0);
     
-    myImage.loadImage("texture05.jpg");
+    myImage.loadImage("texture07.png");
     
     mesh.addVertex(ofVec3f(100,100,0));
     mesh.addVertex(ofVec3f(100,200,0));

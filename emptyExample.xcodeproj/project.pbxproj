@@ -15,6 +15,9 @@
 		C28E92DD1E3257BD00AA5728 /* Square.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C28E92DB1E3257BD00AA5728 /* Square.cpp */; };
 		C2A1A1EB1E56893200CDE1F2 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A1A1E91E56893200CDE1F2 /* Box.cpp */; };
 		C2A1A1EE1E56922F00CDE1F2 /* Plate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A1A1EC1E56922F00CDE1F2 /* Plate.cpp */; };
+		C2A1A2091E59265600CDE1F2 /* ofx3dModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A1A2001E59265600CDE1F2 /* ofx3dModelLoader.cpp */; };
+		C2A1A20A1E59265600CDE1F2 /* model3DS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A1A2041E59265600CDE1F2 /* model3DS.cpp */; };
+		C2A1A20B1E59265600CDE1F2 /* texture3DS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A1A2061E59265600CDE1F2 /* texture3DS.cpp */; };
 		C2A1B7E21E4E298A00E0793C /* Cone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2A1B7E01E4E298A00E0793C /* Cone.cpp */; };
 		C2AE880E1E365F3300619B63 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AE87FD1E365F3300619B63 /* ofxBaseGui.cpp */; };
 		C2AE880F1E365F3300619B63 /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AE87FF1E365F3300619B63 /* ofxButton.cpp */; };
@@ -88,6 +91,14 @@
 		C2A1A1EA1E56893200CDE1F2 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
 		C2A1A1EC1E56922F00CDE1F2 /* Plate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plate.cpp; sourceTree = "<group>"; };
 		C2A1A1ED1E56922F00CDE1F2 /* Plate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plate.h; sourceTree = "<group>"; };
+		C2A1A1FF1E59265600CDE1F2 /* ofx3DBaseLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofx3DBaseLoader.h; sourceTree = "<group>"; };
+		C2A1A2001E59265600CDE1F2 /* ofx3dModelLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofx3dModelLoader.cpp; sourceTree = "<group>"; };
+		C2A1A2011E59265600CDE1F2 /* ofx3DModelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofx3DModelLoader.h; sourceTree = "<group>"; };
+		C2A1A2041E59265600CDE1F2 /* model3DS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = model3DS.cpp; sourceTree = "<group>"; };
+		C2A1A2051E59265600CDE1F2 /* model3DS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = model3DS.h; sourceTree = "<group>"; };
+		C2A1A2061E59265600CDE1F2 /* texture3DS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture3DS.cpp; sourceTree = "<group>"; };
+		C2A1A2071E59265600CDE1F2 /* texture3DS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture3DS.h; sourceTree = "<group>"; };
+		C2A1A2081E59265600CDE1F2 /* Vector3DS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3DS.h; sourceTree = "<group>"; };
 		C2A1B7E01E4E298A00E0793C /* Cone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cone.cpp; sourceTree = "<group>"; };
 		C2A1B7E11E4E298A00E0793C /* Cone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cone.h; sourceTree = "<group>"; };
 		C2AE87FD1E365F3300619B63 /* ofxBaseGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
@@ -161,6 +172,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				C2A1A1FE1E59265600CDE1F2 /* ofx3DModelLoader */,
 				C2AE87FB1E365F3300619B63 /* ofxGui */,
 			);
 			name = addons;
@@ -212,6 +224,38 @@
 				C2A1A1EC1E56922F00CDE1F2 /* Plate.cpp */,
 			);
 			name = Objects;
+			sourceTree = "<group>";
+		};
+		C2A1A1FE1E59265600CDE1F2 /* ofx3DModelLoader */ = {
+			isa = PBXGroup;
+			children = (
+				C2A1A1FF1E59265600CDE1F2 /* ofx3DBaseLoader.h */,
+				C2A1A2001E59265600CDE1F2 /* ofx3dModelLoader.cpp */,
+				C2A1A2011E59265600CDE1F2 /* ofx3DModelLoader.h */,
+				C2A1A2021E59265600CDE1F2 /* src */,
+			);
+			name = ofx3DModelLoader;
+			path = ../../../addons/ofx3DModelLoader;
+			sourceTree = "<group>";
+		};
+		C2A1A2021E59265600CDE1F2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C2A1A2031E59265600CDE1F2 /* 3DS */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		C2A1A2031E59265600CDE1F2 /* 3DS */ = {
+			isa = PBXGroup;
+			children = (
+				C2A1A2041E59265600CDE1F2 /* model3DS.cpp */,
+				C2A1A2051E59265600CDE1F2 /* model3DS.h */,
+				C2A1A2061E59265600CDE1F2 /* texture3DS.cpp */,
+				C2A1A2071E59265600CDE1F2 /* texture3DS.h */,
+				C2A1A2081E59265600CDE1F2 /* Vector3DS.h */,
+			);
+			path = 3DS;
 			sourceTree = "<group>";
 		};
 		C2AE87FB1E365F3300619B63 /* ofxGui */ = {
@@ -393,7 +437,9 @@
 				C28E92D61E2FD7D700AA5728 /* ofApp.h in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				C23A69011E3E4AF10086F882 /* Object.cpp in Sources */,
+				C2A1A2091E59265600CDE1F2 /* ofx3dModelLoader.cpp in Sources */,
 				C2A1B7E21E4E298A00E0793C /* Cone.cpp in Sources */,
+				C2A1A20B1E59265600CDE1F2 /* texture3DS.cpp in Sources */,
 				C2AE88141E365F3300619B63 /* ofxSliderGroup.cpp in Sources */,
 				C28E92DA1E2FDC5200AA5728 /* Sphere.cpp in Sources */,
 				C2AE880F1E365F3300619B63 /* ofxButton.cpp in Sources */,
@@ -402,6 +448,7 @@
 				C2A1A1EE1E56922F00CDE1F2 /* Plate.cpp in Sources */,
 				C2A1A1EB1E56893200CDE1F2 /* Box.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				C2A1A20A1E59265600CDE1F2 /* model3DS.cpp in Sources */,
 				C2AE88121E365F3300619B63 /* ofxPanel.cpp in Sources */,
 				C2AE88151E365F3300619B63 /* ofxToggle.cpp in Sources */,
 				C2AE88101E365F3300619B63 /* ofxGuiGroup.cpp in Sources */,

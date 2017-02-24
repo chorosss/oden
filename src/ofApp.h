@@ -1,7 +1,10 @@
 #pragma once
 
 #include "ofMain.h"
+//Addon
+#include "ofx3DModelLoader.h"
 #include "ofxGui.h"
+//Class
 #include "Object.h"
 #include "Cylinder.h"
 #include "Sphere.h"
@@ -9,6 +12,7 @@
 #include "Cone.h"
 #include "Box.h"
 #include "Plate.h"
+
 
 
 class ofApp : public ofBaseApp{
@@ -39,6 +43,9 @@ class ofApp : public ofBaseApp{
     ofMesh mesh;
     ofEasyCam cam;
     ofLight light;
+    
+    //modelTest
+    ofx3DModelLoader squirrelModel;
     
     
     //sound
