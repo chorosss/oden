@@ -25,8 +25,11 @@ void ofApp::setup(){
     
     Mysquare.init();
     
+    //texture
+    myImage.loadImage("texture01.jpg");
+    
     //3dmodel
-    squirrelModel.loadModel("squirrel/NewSquirrel.3ds", 20);
+    squirrelModel.loadModel("testPoly/testPoly.3ds", 20);
     squirrelModel.setRotation(0, 90, 1, 0, 0);
     squirrelModel.setRotation(1, 270, 0, 0, 1);
     squirrelModel.setScale(0.9, 0.9, 0.9);
@@ -104,9 +107,14 @@ void ofApp::draw(){
     ofLine(150, 0, 0, 15000, 0, 0);
     
     //3d model
-    ofSetColor(255, 255, 255, 255);
+    ofSetColor(255, 0, 0, 255);
     squirrelModel.setScale(0.9, 0.9, 0.9);
+    
+    ofTexture &tex = myImage.getTextureReference();
+    tex.bind();
     squirrelModel.draw();
+    tex.unbind();
+    
     
     cam.end();
 

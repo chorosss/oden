@@ -47,9 +47,12 @@ class ofApp : public ofBaseApp{
     //modelTest
     ofx3DModelLoader squirrelModel;
     
+    //texture
+    ofImage myImage;
+    ofTexture tex;
+    
     
     //sound
-    ofImage myImage;
     ofSoundPlayer mySound;
     ofSoundPlayer mySound_2;
     
