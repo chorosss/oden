@@ -7,6 +7,10 @@ void ofApp::setup(){
     angle = 0;
     camDistance = 1200.0f;
     
+    ofSetLogLevel(OF_LOG_VERBOSE);
+    ofDisableArbTex(); // we need GL_TEXTURE_2D for our models coords.
+
+    
     ofBackground(0, 180, 0);
     ofEnableDepthTest();
     ofEnableSmoothing();
@@ -29,11 +33,20 @@ void ofApp::setup(){
     myImage.loadImage("texture01.jpg");
     
     //3dmodel
-    squirrelModel.loadModel("testPoly/testPoly.3ds", 20);
-    squirrelModel.setRotation(0, 90, 1, 0, 0);
+    squirrelModel.loadModel("testPoly/testPoly.3ds", 30);
     squirrelModel.setRotation(1, 270, 0, 0, 1);
     squirrelModel.setScale(0.9, 0.9, 0.9);
     squirrelModel.setPosition(0, 0, 0);
+    
+    animationPosition = 0;
+    
+    model.loadModel("testPoly2/testPoly.dae", true);
+    model.setScale(0.5, 0.5, 0.5);
+    model.setPosition(100, 100, 0);
+    model.setLoopStateForAllAnimations(OF_LOOP_NORMAL);
+    model.playAllAnimations();
+    
+    tex.allocate(400,400,GL_RGB);
 
 
     // GUIを設定
@@ -48,6 +61,9 @@ void ofApp::update(){
     mySound.setVolume(volume); //サウンド再生開始
     float * val = ofSoundGetSpectrum(1); //再生中のサウンドの音量を取得
     boxSize = val[0] * 1000.0; //円の半径に適用
+    
+    model.update();
+    mesh = model.getCurrentAnimatedMesh(0);
     
     
     for(int i = 0; i < Spheres.size();i++){
@@ -65,7 +81,6 @@ void ofApp::update(){
     for(int i = 0; i < Plates.size();i++){
         Plates[i].update();
     }
-
 
 }
 
@@ -107,14 +122,17 @@ void ofApp::draw(){
     ofLine(150, 0, 0, 15000, 0, 0);
     
     //3d model
-    ofSetColor(255, 0, 0, 255);
-    squirrelModel.setScale(0.9, 0.9, 0.9);
+    //ofSetColor(255, 0, 0, 255);
     
-    ofTexture &tex = myImage.getTextureReference();
+    tex = myImage.getTextureReference();
     tex.bind();
     squirrelModel.draw();
-    tex.unbind();
     
+    tex.unbind();
+    tex = myImage.getTextureReference();
+    tex.bind();
+    model.drawFaces();
+    tex.unbind();
     
     cam.end();
 
@@ -123,7 +141,7 @@ void ofApp::draw(){
     gui.draw();
     ofSetHexColor(0x000000);
     ofDrawBitmapString("fps: "+ofToString(ofGetFrameRate(), 2), 10, 15);
-
+    ofDrawBitmapString("num animations for this model: " + ofToString(model.getAnimationCount()), 10, 260);
     
     
 }
@@ -210,18 +228,19 @@ void ofApp::mouseMoved(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-   
+    // pause all animations, so we can scrub through them manually.
+    //model.setPausedForAllAnimations(true);
+    animationPosition = y / (float)ofGetHeight();
 
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
 }
 
 //--------------------------------------------------------------

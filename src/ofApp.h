@@ -3,6 +3,7 @@
 #include "ofMain.h"
 //Addon
 #include "ofx3DModelLoader.h"
+#include "ofxAssimpModelLoader.h"
 #include "ofxGui.h"
 //Class
 #include "Object.h"
@@ -36,6 +37,7 @@ class ofApp : public ofBaseApp{
     float angle;
     float camDistance;
     ofPoint current;
+    float animationPosition;
     
     //premitive
     ofBoxPrimitive box;
@@ -46,6 +48,8 @@ class ofApp : public ofBaseApp{
     
     //modelTest
     ofx3DModelLoader squirrelModel;
+    ofxAssimpModelLoader model;
+    
     
     //texture
     ofImage myImage;
