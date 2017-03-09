@@ -42,6 +42,7 @@ class ofApp : public ofBaseApp{
     //premitive
     ofBoxPrimitive box;
     ofSpherePrimitive sphere;
+    ofPlanePrimitive texturePlane;
     ofMesh mesh;
     ofEasyCam cam;
     ofLight light;
@@ -75,5 +76,9 @@ class ofApp : public ofBaseApp{
     ofxFloatSlider volume;
     ofxColorSlider color;
     ofxVec2Slider position;
+    ofxFloatSlider sphereSize;
+    ofxFloatSlider map_x;
+    ofxFloatSlider map_y;
     ofxFloatSlider frameRate;
+    ofxFloatSlider rotateX;
 };

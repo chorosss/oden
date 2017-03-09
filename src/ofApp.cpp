@@ -7,11 +7,13 @@ void ofApp::setup(){
     angle = 0;
     camDistance = 1200.0f;
     
-    ofSetLogLevel(OF_LOG_VERBOSE);
-    ofDisableArbTex(); // we need GL_TEXTURE_2D for our models coords.
+    map_x = 270;
+    map_y = 180;
+    
+    sphereSize = 10;
 
     
-    ofBackground(0, 180, 0);
+    ofBackground(255, 118, 118);
     ofEnableDepthTest();
     ofEnableSmoothing();
     
@@ -25,12 +27,17 @@ void ofApp::setup(){
 
 //    std::cout << "value: " << test << endl;
     
-    current = ofPoint(250,0,0);
+    current = ofPoint(0,0,0);
     
     Mysquare.init();
     
     //texture
-    myImage.loadImage("texture01.jpg");
+    myImage.loadImage("noise.png");
+    
+    
+    //texturePlane
+    
+    texturePlane.set(100,100);
     
     //3dmodel
     squirrelModel.loadModel("testPoly/testPoly.3ds", 30);
@@ -38,21 +45,15 @@ void ofApp::setup(){
     squirrelModel.setScale(0.9, 0.9, 0.9);
     squirrelModel.setPosition(0, 0, 0);
     
-    animationPosition = 0;
-    
-    model.loadModel("testPoly2/testPoly.dae", true);
-    model.setScale(0.5, 0.5, 0.5);
-    model.setPosition(100, 100, 0);
-    model.setLoopStateForAllAnimations(OF_LOOP_NORMAL);
-    model.playAllAnimations();
-    
-    tex.allocate(400,400,GL_RGB);
-
-
     // GUIを設定
     gui.setup();
     gui.add(distance.setup("distance", 1200, 0, 3800));
     gui.add(volume.setup("volume", 0, 0, 1));
+    gui.add(sphereSize.setup("sphereSize", 10, 0, 100));
+    gui.add(map_x.setup("map_x", 360, 0, 1800));
+    gui.add(map_y.setup("map_y", 360, 0, 1800));
+    gui.add(rotateX.setup("rotateX", 0, 0, 360));
+
  }
 
 //--------------------------------------------------------------
@@ -62,9 +63,9 @@ void ofApp::update(){
     float * val = ofSoundGetSpectrum(1); //再生中のサウンドの音量を取得
     boxSize = val[0] * 1000.0; //円の半径に適用
     
-    model.update();
-    mesh = model.getCurrentAnimatedMesh(0);
-    
+    //background
+    texturePlane.set(sphereSize,sphereSize);
+
     
     for(int i = 0; i < Spheres.size();i++){
         Spheres[i].update();
@@ -88,19 +89,30 @@ void ofApp::update(){
 void ofApp::draw(){
     glEnable(GL_DEPTH_TEST);
     cam.begin();
+    
+    ofVec3f camDir = cam.getLookAtDir();
+    double angle = (180 * acos(camDir.x)) / PI;
+    
     ofSetColor(255);
     
-    ofVec3f camPos = current;
+    ofVec3f targetPos = current;
+    ofVec3f camAxis = cam.getXAxis();
+    ofVec3f camAngle = cam.getLookAtDir();
     
-    cam.setTarget(camPos);
+    cam.setTarget(targetPos);
     cam.setDistance(distance);
     
+    ofVec3f camPos = cam.getPosition();
+    
     Mysquare.draw();
+    
+    std::cout << "LookAtDir: " << cam.getLookAtDir() << endl;
+    std::cout << "position: " << camPos << endl;
+
     
     for(int i = 0; i < Spheres.size();i++){
         Spheres[i].draw(boxSize);
     }
-
     for(int i = 0; i < Cylinders.size();i++){
         Cylinders[i].draw(boxSize);
     }
@@ -118,23 +130,56 @@ void ofApp::draw(){
 
     //bar
     ofSetColor(255, 255, 255);
-    ofSetLineWidth(30);
-    ofLine(150, 0, 0, 15000, 0, 0);
+    ofSetLineWidth(10);
+    ofLine(0, -300, 0, 0, 1000, 0);
+    
+    
+    //x軸
+    ofSetColor(255, 0, 0);
+    ofSetLineWidth(1);
+    ofLine(-1000, 0, 0, 1000,0, 0);
+    
+    //y軸
+    ofSetColor(0, 255, 0);
+    ofSetLineWidth(1);
+    ofLine(0, -1000, 0, 0,1000, 0);
+    
+    //z軸
+    ofSetColor(0, 0, 255);
+    ofSetLineWidth(1);
+    ofLine(0, 0, -1000, 0,0, 1000);
+
+
+    
     
     //3d model
-    //ofSetColor(255, 0, 0, 255);
-    
-    tex = myImage.getTextureReference();
-    tex.bind();
+    ofSetColor(255, 216, 120, 255);
     squirrelModel.draw();
     
-    tex.unbind();
-    tex = myImage.getTextureReference();
-    tex.bind();
-    model.drawFaces();
-    tex.unbind();
+    //AxisTest
+    ofSetColor(255, 255, 255);
+    ofSetLineWidth(100);
+    //    ofLine(camPos.x,camPos.y,camPos.z, camAxis.x+10, camAxis.y+10, camAxis.z+10);
+    ofLine(camPos.x,camPos.y,camPos.z-1, current.x, current.y, current.z);
+
+    
+    //background
+    ofSetColor(255, 255, 255,255);
+    
+    ofPushMatrix();
+    
+    ofTranslate(camPos.x,camPos.y,camPos.z-10);
+    ofRotateY(rotateX);
+    texturePlane.setPosition(0,0,0);
+    texturePlane.mapTexCoords(0, 0, map_x, map_y);
+    myImage.getTextureReference().bind();
+    texturePlane.draw();
+    myImage.getTextureReference().unbind();
+
+    ofPopMatrix();
     
     cam.end();
+    
 
     // GUIを表示
     glDisable(GL_DEPTH_TEST);
@@ -153,7 +198,7 @@ void ofApp::keyPressed  (int key){
         case 'a':
         {
             ofPoint prev = current;
-            ofPoint next = ofPoint(prev.x + 200,0,0);
+            ofPoint next = ofPoint(0,prev.y +200,0);
             
             Sphere s;
             s.init(next);
@@ -166,7 +211,7 @@ void ofApp::keyPressed  (int key){
         case 's':
         {
             ofPoint prev = current;
-            ofPoint next = ofPoint(prev.x + 200,0,0);
+            ofPoint next = ofPoint(0,prev.y +200,0);
             
             Cylinder c;
             c.init(next);
@@ -178,7 +223,7 @@ void ofApp::keyPressed  (int key){
         case 'd':
         {
             ofPoint prev = current;
-            ofPoint next = ofPoint(prev.x + 200,0,0);
+            ofPoint next = ofPoint(0,prev.y +200,0);
             
             Cone cone;
             cone.Object::setPos(next);
@@ -191,7 +236,7 @@ void ofApp::keyPressed  (int key){
         case 'f':
         {
             ofPoint prev = current;
-            ofPoint next = ofPoint(prev.x + 200,0,0);
+            ofPoint next = ofPoint(0,prev.y +200,0);
             
             Box b;
             b.Object::setPos(next);
@@ -204,7 +249,7 @@ void ofApp::keyPressed  (int key){
         case 'g':
         {
             ofPoint prev = current;
-            ofPoint next = ofPoint(prev.x + 200,0,0);
+            ofPoint next = ofPoint(0,prev.y +200,0);
             
             Plate p;
             p.Object::setPos(next);
