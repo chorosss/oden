@@ -32,9 +32,9 @@ void Box::draw(){
     
     //box
     box.rotate(sin(angle),10,10,10);
-    ofSetColor(0, 0, 0);
+    ofSetColor(255, 0, 0);
     box.draw();
-    ofSetColor(255, 255, 255);
+    ofSetColor(205, 0, 0);
     ofSetLineWidth(1);
     box.drawWireframe();
 }

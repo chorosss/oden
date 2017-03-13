@@ -3,6 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    ofEnableDepthTest();
+    ofEnableSmoothing();
     
     angle = 0;
     camDistance = 1200.0f;
@@ -14,15 +16,7 @@ void ofApp::setup(){
 
     
     ofBackground(255, 118, 118);
-    ofEnableDepthTest();
-    ofEnableSmoothing();
-    
-    light.enable();
-    light.setSpotlight();
-    light.setPosition(-100, 100, 100);
-    light.setAmbientColor(ofFloatColor(.7,1,1,0.0));
-    light.setDiffuseColor(ofFloatColor(.2,0,0));
-    light.setSpecularColor(ofFloatColor(0,0,0));
+
     ofSetFrameRate(60);
 
 //    std::cout << "value: " << test << endl;
@@ -53,6 +47,22 @@ void ofApp::setup(){
     gui.add(map_x.setup("map_x", 360, 0, 1800));
     gui.add(map_y.setup("map_y", 360, 0, 1800));
     gui.add(rotateX.setup("rotateX", 0, 0, 360));
+    
+    //light
+    light.setDirectional();
+    light.setPosition(-1000, 1000, 1000);
+    light.setAmbientColor(ofFloatColor(1,1,1,0));
+    light.setDiffuseColor(ofFloatColor(0, 0, 0,0));
+    light.setSpecularColor(ofFloatColor(1,1,1,.1));
+    light.setAttenuation();
+    
+//    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+//    ofEnableDepthTest();
+//    glShadeModel(GL_SMOOTH);
+    
+    light.enable();
+    ofEnableSeparateSpecularLight();
+    
 
  }
 
@@ -89,9 +99,12 @@ void ofApp::update(){
 void ofApp::draw(){
     glEnable(GL_DEPTH_TEST);
     cam.begin();
+    //light.enable();
     
     ofVec3f camDir = cam.getLookAtDir();
-    double angle = (180 * acos(camDir.x)) / PI;
+    double a = (180 * acos(camDir.x)) / PI;
+    
+    ofVec3f lightPos = light.getPosition();
     
     ofSetColor(255);
     
@@ -103,11 +116,12 @@ void ofApp::draw(){
     cam.setDistance(distance);
     
     ofVec3f camPos = cam.getPosition();
-    
+
     Mysquare.draw();
     
-    std::cout << "LookAtDir: " << cam.getLookAtDir() << endl;
-    std::cout << "position: " << camPos << endl;
+//    std::cout << "LookAtDir: " << cam.getLookAtDir() << endl;
+//    std::cout << "angle: " << cam.getHeading() << endl;
+
 
     
     for(int i = 0; i < Spheres.size();i++){
@@ -148,12 +162,14 @@ void ofApp::draw(){
     ofSetColor(0, 0, 255);
     ofSetLineWidth(1);
     ofLine(0, 0, -1000, 0,0, 1000);
-
-
     
+    //z軸
+    ofSetColor(0, 255, 255);
+    ofSetLineWidth(1);
+    ofLine(lightPos.x,lightPos.y,lightPos.z,current.x,current.y,current.z);
     
     //3d model
-    ofSetColor(255, 216, 120, 255);
+    ofSetColor(255, 0, 0, 255);
     squirrelModel.draw();
     
     //AxisTest
@@ -164,19 +180,19 @@ void ofApp::draw(){
 
     
     //background
-    ofSetColor(255, 255, 255,255);
-    
-    ofPushMatrix();
-    
-    ofTranslate(camPos.x,camPos.y,camPos.z-10);
-    ofRotateY(rotateX);
-    texturePlane.setPosition(0,0,0);
-    texturePlane.mapTexCoords(0, 0, map_x, map_y);
-    myImage.getTextureReference().bind();
-    texturePlane.draw();
-    myImage.getTextureReference().unbind();
-
-    ofPopMatrix();
+//    ofSetColor(255, 255, 255,255);
+//    
+//    ofPushMatrix();
+//    
+//    ofTranslate(camPos.x,camPos.y,camPos.z-10);
+//    ofRotateY(rotateX);
+//    texturePlane.setPosition(0,0,0);
+//    texturePlane.mapTexCoords(0, 0, map_x, map_y);
+//    myImage.getTextureReference().bind();
+//    texturePlane.draw();
+//    myImage.getTextureReference().unbind();
+//
+//    ofPopMatrix();
     
     cam.end();
     
@@ -188,6 +204,8 @@ void ofApp::draw(){
     ofDrawBitmapString("fps: "+ofToString(ofGetFrameRate(), 2), 10, 15);
     ofDrawBitmapString("num animations for this model: " + ofToString(model.getAnimationCount()), 10, 260);
     
+    
+    //light.disable();
     
 }
 
